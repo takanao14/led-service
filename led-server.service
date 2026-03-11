@@ -1,0 +1,29 @@
+[Unit]
+Description=LED Service gRPC Server
+Documentation=https://github.com/takanao14/led-service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/led-service
+ExecStart=/opt/led-service/bin/led-server
+Restart=on-failure
+RestartSec=5s
+
+# Environment variables
+Environment="GRPC_ADDR=:50051"
+Environment="DISPLAY_SCRIPT=/opt/led-service/scripts/display_image.sh"
+Environment="WORKER_SCRIPT_TIMEOUT=30s"
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=led-server
+
+# Resource limits
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

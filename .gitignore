@@ -1,0 +1,9 @@
+bin
+data
+sounds
+assets
+scripts
+sync.sh
+.idea
+.DS_Store
+.envrc
